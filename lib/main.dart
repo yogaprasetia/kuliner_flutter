@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kuliner_flutter/data/repository/user_repository.dart';
 import 'package:kuliner_flutter/module/base/base_home_view.dart';
 
 
@@ -9,12 +11,14 @@ class kulinerApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return RepositoryProvider(
+      create: (context) => UserRepository(),
+      child:  MaterialApp(
       title: 'Kuliner App',
       theme: ThemeData(
         primarySwatch: Colors.pink
       ),
-      home: const BaseHomeView(),
-    );
+      home: const BaseHomeView(),),
+      );
   }
 }

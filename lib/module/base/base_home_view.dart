@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kuliner_flutter/data/home_menu_model.dart';
+import 'package:kuliner_flutter/data/model/home_menu_model.dart';
 import 'package:kuliner_flutter/module/favourite/favourite_view.dart';
 import 'package:kuliner_flutter/module/home/home_view.dart';
 import 'package:kuliner_flutter/module/profile/profile_view.dart';
