@@ -11,3 +11,11 @@ class GetPlaceEvent extends HomeEvent {
 
   
 }
+
+class NoInternetEvent extends HomeEvent {
+  String message;
+  NoInternetEvent(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
