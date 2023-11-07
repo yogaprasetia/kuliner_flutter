@@ -29,5 +29,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       final result = response != null ? HomeLoaded(response) : HomeNotLoaded('no_data');
       emit(result);
     });
+    on<NoInternetEvent>((event, emit) async {
+      emit(HomeNoInternet(event.message));
+      final response = await userRepository?.getPlace();
+      final result = response != null ? HomeLoaded(response) : HomeNotLoaded('no_data');
+      emit(result);
+    });
   }
 }

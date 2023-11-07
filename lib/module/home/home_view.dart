@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuliner_flutter/data/repository/user_repository.dart';
 import 'package:kuliner_flutter/module/home/bloc/home_bloc.dart';
 import 'package:kuliner_flutter/data/model/place_model.dart' as placeModel;
-import 'package:kuliner_flutter/module/utils/progress_loading_view.dart';
+import 'package:kuliner_flutter/module/utils/helper_utils.dart';
+import 'package:kuliner_flutter/module/utils/widget/progress_loading_view.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -123,12 +124,17 @@ class _HomeViewState extends State<HomeView> {
       child: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           print('HomeState: state ${state.toString()}');
+          if(state is HomeNoInternet) {
+            toastMessage(context, state.message);
+          }
         },
         builder: (context, state) {
           if (state is HomeLoading) {
             return ProgressLoadingView();
           } else if (state is HomeLoaded) {
             return Container(child: _buildPlaceList(state.placeModel.data));
+          } else if (state is HomeNoInternet) {
+            return Container();
           } else {
             return Container();
           }

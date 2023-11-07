@@ -20,3 +20,8 @@ final class HomeNotLoaded extends HomeState {
   String message;
   HomeNotLoaded(this.message);
 }
+
+final class HomeNoInternet extends HomeState {
+  String message;
+  HomeNoInternet(this.message);
+}
