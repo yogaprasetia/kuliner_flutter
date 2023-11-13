@@ -18,5 +18,21 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
       final result = response != null ? FavouriteLoaded(response) : FavouriteNotLoaded('no_data');
       emit(result);
     });
+
+    on<CheckLoginEvent>((event, emit) async {
+
+      bool isLogin = false;
+      await userRepository?.isLogin.then((value) {
+        isLogin = value;
+      });
+
+      if (isLogin) {
+        await userRepository?.getAuthToken.then((value) {
+          emit(FavouriteIsLogin( value ));
+        });
+      } else {
+        emit(FavouriteIsNotLogin());
+      }
+    });
   }
 }

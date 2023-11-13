@@ -15,3 +15,9 @@ class GetFavouriteEvent extends FavouriteEvent {
     @override
   List<Object> get props => [token];
 }
+
+class CheckLoginEvent extends FavouriteEvent {
+
+  @override
+  List<Object> get props => [];
+}

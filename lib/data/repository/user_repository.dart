@@ -16,7 +16,7 @@ class UserRepository {
     await prefService.setBool(Constant.prefIsLogin, true);
     await setAuthToken(token);
   }
-   Future<bool> get getAuthToken => prefService.getBool(Constant.prefAuthToken);
+   Future<String> get getAuthToken => prefService.getString(Constant.prefAuthToken);
    Future setAuthToken(String token) async {
     await prefService.setString(Constant.prefAuthToken, token);
    }

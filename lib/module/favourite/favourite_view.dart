@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kuliner_flutter/data/repository/user_repository.dart';
 import 'package:kuliner_flutter/module/favourite/bloc/favourite_bloc.dart';
 import 'package:kuliner_flutter/data/model/favourite_model.dart' as favouriteModel;
+import 'package:kuliner_flutter/module/utils/widget/login_required_view.dart';
 import 'package:kuliner_flutter/module/utils/widget/progress_loading_view.dart';
 
 class FavouriteView extends StatefulWidget {
@@ -19,7 +20,8 @@ class _FavouriteViewState extends State<FavouriteView> {
   @override
   void initState() {
     favouriteBloc = FavouriteBloc(RepositoryProvider.of<UserRepository>(context));
-    favouriteBloc?.add(GetFavouriteEvent('5|YM96SHenXX05oHAExmSNVhk0UfWJ9XvBdSxu8Cos5b81b629'));
+    favouriteBloc?.add(CheckLoginEvent());
+    //favouriteBloc?.add(GetFavouriteEvent('5|YM96SHenXX05oHAExmSNVhk0UfWJ9XvBdSxu8Cos5b81b629'));
     super.initState();
   }
 
@@ -122,12 +124,18 @@ class _FavouriteViewState extends State<FavouriteView> {
       child: BlocConsumer<FavouriteBloc, FavouriteState>(
         listener: (context, state) {
           print('FavouriteState: state ${state.toString()}');
+          if (state is FavouriteIsLogin) {
+            favouriteBloc?.add(GetFavouriteEvent( state.token ));
+          }
         },
         builder: (context, state) {
           if (state is FavouriteLoading) {
             return const ProgressLoadingView();
           } else if (state is FavouriteLoaded) {
-            return Container(child: _buildFavouriteList(state.favouriteModel.data));
+            return Container(
+              child: _buildFavouriteList(state.favouriteModel.data));
+          } else if (state is FavouriteIsNotLogin) {
+            return const LoginRequiredView();
           } else {
             return Container();
           }
