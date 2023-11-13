@@ -38,8 +38,8 @@ class _FavouriteViewState extends State<FavouriteView> {
                   child: Column(
                     children: [
                       Container(
-                        width: MediaQuery.of(context).size.width,
-                        height: 200.0,
+                        width: 150.0,
+                        height: 100.0,
                         child: Card(
                           clipBehavior: Clip.antiAlias,
                           shape: RoundedRectangleBorder(
@@ -95,15 +95,13 @@ class _FavouriteViewState extends State<FavouriteView> {
                               ],
                             ),
                           ),
-                          Container(
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  // Icons.favorite,
-                                  Icons.favorite_border,
-                                  color: Colors.pink,
-                                )),
-                          ),
+                          IconButton(
+                              onPressed: () {},
+                              icon: const Icon(
+                                // Icons.favorite,
+                                Icons.favorite_border,
+                                color: Colors.pink,
+                              )),
                         ],
                       ),
                     ],
@@ -127,7 +125,7 @@ class _FavouriteViewState extends State<FavouriteView> {
         },
         builder: (context, state) {
           if (state is FavouriteLoading) {
-            return ProgressLoadingView();
+            return const ProgressLoadingView();
           } else if (state is FavouriteLoaded) {
             return Container(child: _buildFavouriteList(state.favouriteModel.data));
           } else {
