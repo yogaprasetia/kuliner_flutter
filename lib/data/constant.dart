@@ -3,7 +3,7 @@ class Constant {
 
   static const String apiPlace = "/api/place";
   static const String apiFavourite = "/api/user/place";
-
+  static const String apiLogin = "/api/login";
   static const String routeLogin = "/loginPage";
 
   static const String prefIsLogin = "pref_is_login";

@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:http/http.dart';
 import 'package:http_interceptor/http/http.dart';
 import 'package:kuliner_flutter/data/constant.dart';
+import 'package:kuliner_flutter/data/model/error_model.dart';
 import 'package:kuliner_flutter/data/model/favourite_model.dart';
+import 'package:kuliner_flutter/data/model/login_model.dart';
 import 'package:kuliner_flutter/data/model/place_model.dart';
 import 'package:kuliner_flutter/data/remote/logging_interceptor.dart';
 
@@ -35,5 +37,22 @@ class ApiService {
       headers: setHeader(token));
     final json = jsonDecode(response.body);
     return FavouriteModel.fromJson(json);
+  }
+
+  Future<dynamic> userLogin(String email, String password) async {
+    final url = Uri.https(Constant.baseUrl,Constant.apiLogin);
+    final response = await _client.post(
+      url,
+      body: {
+        "email": email,
+        "password": password
+      });
+    final json = jsonDecode(response.body);
+    try {
+      return LoginModel.fromJson(json);
+    } catch (e) {
+      print(e.toString());
+      return ErrorModel.fromJson(json);
+    }
   }
 }

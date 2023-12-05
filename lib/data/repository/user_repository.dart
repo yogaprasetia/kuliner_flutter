@@ -11,6 +11,11 @@ class UserRepository {
   Future<PlaceModel> getPlace() => apiService.getPlace(); 
   Future<FavouriteModel> getFavourite(String token) => apiService.getFavourite(token);
 
+  Future<dynamic> userLogin(
+    String email,
+    String password,
+  ) => apiService.userLogin(email, password);
+  
   Future<bool> get isLogin => prefService.getBool(Constant.prefIsLogin);
   Future setIsLogin(String token) async {
     await prefService.setBool(Constant.prefIsLogin, true);
