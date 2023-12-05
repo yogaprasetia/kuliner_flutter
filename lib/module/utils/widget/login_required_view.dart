@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:kuliner_flutter/data/constant.dart';
 
 class LoginRequiredView extends StatefulWidget {
-  const LoginRequiredView({super.key});
+  const LoginRequiredView({
+    required this.callback,
+    super.key});
+
+  final VoidCallback callback;
 
   @override
   State<LoginRequiredView> createState() => _LoginRequiredViewState();
@@ -13,7 +17,7 @@ class _LoginRequiredViewState extends State<LoginRequiredView> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      constraints: BoxConstraints.expand(),
+      constraints: const BoxConstraints.expand(),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -28,7 +32,7 @@ class _LoginRequiredViewState extends State<LoginRequiredView> {
               ),
             ),
           ),
-          Container(
+          SizedBox(
             width: 225.0,
             height: 50.0,
             child: MaterialButton(
@@ -36,13 +40,13 @@ class _LoginRequiredViewState extends State<LoginRequiredView> {
               height: 50,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
-                side: BorderSide(
+                side: const BorderSide(
                   color: Colors.pink,
                   style: BorderStyle.solid,
                   width: 2
                 )
               ),
-              child: Text('Login', 
+              child: const Text('Login', 
               style: TextStyle(
                 color: Colors.pink, 
                 fontSize: 18
@@ -50,7 +54,7 @@ class _LoginRequiredViewState extends State<LoginRequiredView> {
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed(Constant.routeLogin).then((value) {
-                    
+                    widget.callback();
                   });
               },
               ),

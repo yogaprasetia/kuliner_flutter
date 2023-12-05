@@ -135,7 +135,11 @@ class _FavouriteViewState extends State<FavouriteView> {
             return Container(
               child: _buildFavouriteList(state.favouriteModel.data));
           } else if (state is FavouriteIsNotLogin) {
-            return const LoginRequiredView();
+            return LoginRequiredView(
+              callback: () {
+                favouriteBloc?.add( CheckLoginEvent() );
+              },
+            );
           } else {
             return Container();
           }

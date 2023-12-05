@@ -25,7 +25,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   Widget _buildButton() {
-    return Container(
+    return SizedBox(
       width: double.infinity,
       child: MaterialButton(
         color: Colors.pink,
@@ -57,6 +57,7 @@ class _LoginViewState extends State<LoginView> {
           listener: (context, state) {
             if (state is LoginLoaded) {
               toastMessage(context, "Login Successfully");
+              Navigator.of(context).pop();
             } else if (state is LoginNotLoaded) {
               toastMessage(context, state.message);
             }
@@ -121,6 +122,37 @@ class _LoginViewState extends State<LoginView> {
                     margin: const EdgeInsets.only(left: 24, right: 24, top: 24),
                     // child: ProgressLoadingView(),
                     child: state is LoginLoading ? const ProgressLoadingView() : _buildButton(),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: const EdgeInsets.only(top: 32),
+                        padding: const EdgeInsets.all(4),
+                        child: const Text(
+                          "Don't Have Account?",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54
+                          ),
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 32),
+                        padding: const EdgeInsets.all(4),
+                        child: InkWell(
+                          child: const Text(
+                            "Register",
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.pink,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          onTap: () {},
+                        ),
+                      )
+                    ],
                   )
                 ],
               ),
