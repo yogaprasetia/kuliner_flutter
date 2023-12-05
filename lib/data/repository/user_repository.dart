@@ -15,7 +15,7 @@ class UserRepository {
     String email,
     String password,
   ) => apiService.userLogin(email, password);
-  
+
   Future<bool> get isLogin => prefService.getBool(Constant.prefIsLogin);
   Future setIsLogin(String token) async {
     await prefService.setBool(Constant.prefIsLogin, true);
@@ -25,4 +25,11 @@ class UserRepository {
    Future setAuthToken(String token) async {
     await prefService.setString(Constant.prefAuthToken, token);
    }
+
+   Future<dynamic> userRegister(
+    String name,
+    String email,
+    String password,
+    String passwordConfirmation,
+  ) => apiService.userRegister(name, email, password, passwordConfirmation);
 }

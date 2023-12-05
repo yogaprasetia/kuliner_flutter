@@ -7,6 +7,7 @@ import 'package:kuliner_flutter/data/model/error_model.dart';
 import 'package:kuliner_flutter/data/model/favourite_model.dart';
 import 'package:kuliner_flutter/data/model/login_model.dart';
 import 'package:kuliner_flutter/data/model/place_model.dart';
+import 'package:kuliner_flutter/data/model/register_model.dart';
 import 'package:kuliner_flutter/data/remote/logging_interceptor.dart';
 
 class ApiService {
@@ -50,6 +51,25 @@ class ApiService {
     final json = jsonDecode(response.body);
     try {
       return LoginModel.fromJson(json);
+    } catch (e) {
+      print(e.toString());
+      return ErrorModel.fromJson(json);
+    }
+  }
+
+    Future<dynamic> userRegister(String name, String email, String password, String passwordConfirmation) async {
+    final url = Uri.https(Constant.baseUrl,Constant.apiRegister);
+    final response = await _client.post(
+      url,
+      body: {
+        "name" : name,
+        "email": email,
+        "password": password,
+        "password_confirmation" : passwordConfirmation
+      });
+    final json = jsonDecode(response.body);
+    try {
+      return RegisterModel.fromJson(json);
     } catch (e) {
       print(e.toString());
       return ErrorModel.fromJson(json);

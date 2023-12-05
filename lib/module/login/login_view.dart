@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:kuliner_flutter/data/constant.dart';
 import 'package:kuliner_flutter/data/repository/user_repository.dart';
 import 'package:kuliner_flutter/module/login/bloc/login_bloc.dart';
 import 'package:kuliner_flutter/module/utils/helper_utils.dart';
@@ -149,7 +150,9 @@ class _LoginViewState extends State<LoginView> {
                               fontWeight: FontWeight.bold
                             ),
                           ),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).pushReplacementNamed(Constant.routeRegister);
+                          },
                         ),
                       )
                     ],

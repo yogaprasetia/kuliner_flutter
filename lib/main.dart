@@ -4,6 +4,7 @@ import 'package:kuliner_flutter/data/constant.dart';
 import 'package:kuliner_flutter/data/repository/user_repository.dart';
 import 'package:kuliner_flutter/module/base/base_home_view.dart';
 import 'package:kuliner_flutter/module/login/login_view.dart';
+import 'package:kuliner_flutter/module/register/register_view.dart';
 
 
 void main() => runApp(kulinerApp());
@@ -22,7 +23,8 @@ class kulinerApp extends StatelessWidget {
       ),
       home: const BaseHomeView(),
       routes: {
-        Constant.routeLogin: (_) => const LoginView()
+        Constant.routeLogin: (_) => const LoginView(),
+        Constant.routeRegister: (_) => const RegisterView(),
       },),
       );
   }
