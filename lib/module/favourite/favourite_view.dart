@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:kuliner_flutter/data/repository/user_repository.dart';
 import 'package:kuliner_flutter/module/favourite/bloc/favourite_bloc.dart';
 import 'package:kuliner_flutter/data/model/favourite_model.dart' as favouriteModel;
@@ -135,10 +136,15 @@ class _FavouriteViewState extends State<FavouriteView> {
             return Container(
               child: _buildFavouriteList(state.favouriteModel.data));
           } else if (state is FavouriteIsNotLogin) {
-            return LoginRequiredView(
-              callback: () {
+            return FocusDetector(
+              onFocusGained: () {
                 favouriteBloc?.add( CheckLoginEvent() );
               },
+              child: LoginRequiredView(
+                callback: () {
+                  favouriteBloc?.add( CheckLoginEvent() );
+                },
+              ),
             );
           } else {
             return Container();

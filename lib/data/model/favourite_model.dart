@@ -152,12 +152,12 @@ class Meta {
   
   Meta.fromJson(Map<String, dynamic> json){
     currentPage = json['current_page'];
-    from = json['from'];
+    from = json['from'] ?? 0;
     lastPage = json['last_page'];
     links = List.from(json['links']).map((e)=>Links.fromJson(e)).toList();
     path = json['path'];
     perPage = json['per_page'];
-    to = json['to'];
+    to = json['to'] ?? 0;
     total = json['total'];
   }
 

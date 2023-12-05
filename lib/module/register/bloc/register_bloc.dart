@@ -22,7 +22,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         event.name, event.email, event.password, event.passwordConfirmation);
 
       if (response is RegisterModel) {
-        //await userRepository?.setIsLogin(response.token);
+        await userRepository?.setIsLogin(response.token);
         emit(RegisterLoaded(response));
         return;
       }
