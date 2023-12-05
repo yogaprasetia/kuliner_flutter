@@ -21,7 +21,7 @@ class _BaseHomeViewState extends State<BaseHomeView> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text("Home"),
+        title: const Text("Kuliner Pacitan"),
       ),
       body: _buildContainerView(),
       bottomNavigationBar: BottomNavigationBar(
