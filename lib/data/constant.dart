@@ -5,7 +5,8 @@ class Constant {
   static const String apiFavourite = "/api/user/place";
   static const String apiLogin = "/api/login";
   static const String apiRegister = "/api/register";
-  
+  static const String apiProfile = "/api/user";
+
   static const String routeLogin = "/loginPage";
   static const String routeRegister = "/registerPage";
 

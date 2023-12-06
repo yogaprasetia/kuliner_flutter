@@ -53,7 +53,9 @@ class _BaseHomeViewState extends State<BaseHomeView> {
     } else if (_homeMenu == HomeMenu.favouriteSelected) {
       return FavouriteView();
     } else if (_homeMenu == HomeMenu.profileSelected) {
-      return ProfileView();
+      return ProfileView(callback: () {
+         _onMenuTapped(1);
+      },);
     } else {
       return Container();
     }

@@ -7,6 +7,7 @@ import 'package:kuliner_flutter/data/model/error_model.dart';
 import 'package:kuliner_flutter/data/model/favourite_model.dart';
 import 'package:kuliner_flutter/data/model/login_model.dart';
 import 'package:kuliner_flutter/data/model/place_model.dart';
+import 'package:kuliner_flutter/data/model/profile_model.dart';
 import 'package:kuliner_flutter/data/model/register_model.dart';
 import 'package:kuliner_flutter/data/remote/logging_interceptor.dart';
 
@@ -74,5 +75,14 @@ class ApiService {
       print(e.toString());
       return ErrorModel.fromJson(json);
     }
+  }
+
+  Future<ProfileModel> getProfile(String token) async {
+    final url = Uri.https(Constant.baseUrl,Constant.apiProfile);
+    final response = await _client.get(
+      url,
+      headers: setHeader(token));
+    final json = jsonDecode(response.body);
+    return ProfileModel.fromJson(json);
   }
 }

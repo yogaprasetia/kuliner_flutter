@@ -39,15 +39,13 @@ class _RegisterViewState extends State<RegisterView> {
           style: TextStyle(color: Colors.white, fontSize: 18),
         ),
         onPressed: () {
-          if (userEmail.isEmpty) {
+          if (userName.isEmpty) {
+            toastMessage(context, "Username is Required");
+          } else if (userEmail.isEmpty) {
             toastMessage(context, "Email is Required");
           } else if (userPassword.isEmpty) {
             toastMessage(context, "Password is Required");
-          } else if (userName.isEmpty) {
-            toastMessage(context, "Username is Required");
-          } else if (userConfirmationPassword.isEmpty) {
-            toastMessage(context, "Password Confirm is Required");
-          } else if (userPassword != userConfirmationPassword) {
+          } else if (userPassword.isEmpty || userPassword != userConfirmationPassword) {
             toastMessage(context, "Password Confirm not Same");
           }
           registerBloc?.add(UserRegisterEvent(userName, userEmail, userPassword, userConfirmationPassword));
