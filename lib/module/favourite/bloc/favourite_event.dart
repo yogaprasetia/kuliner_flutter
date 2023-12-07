@@ -21,3 +21,11 @@ class CheckLoginEvent extends FavouriteEvent {
   @override
   List<Object> get props => [];
 }
+
+class DeleteFavouriteEvent extends FavouriteEvent {
+  int placeId;
+  DeleteFavouriteEvent(this.placeId);
+
+  @override
+  List<Object> get props => [placeId];
+}

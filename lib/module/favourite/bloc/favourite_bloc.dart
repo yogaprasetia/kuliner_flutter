@@ -8,6 +8,7 @@ part 'favourite_state.dart';
 
 class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
   UserRepository? userRepository;
+  String? authToken;
 
   FavouriteBloc(
     this.userRepository
@@ -28,11 +29,16 @@ class FavouriteBloc extends Bloc<FavouriteEvent, FavouriteState> {
 
       if (isLogin) {
         await userRepository?.getAuthToken.then((value) {
+          authToken = value;
           emit(FavouriteIsLogin( value ));
         });
       } else {
         emit(FavouriteIsNotLogin());
       }
+    });
+
+    on<DeleteFavouriteEvent>((event, emit) async {
+      await userRepository?.deleteFavourite(authToken!, event.placeId);
     });
   }
 }

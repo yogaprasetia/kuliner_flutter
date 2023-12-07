@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focus_detector/focus_detector.dart';
@@ -17,6 +19,7 @@ class FavouriteView extends StatefulWidget {
 class _FavouriteViewState extends State<FavouriteView> {
 
   FavouriteBloc? favouriteBloc;
+  List<int> selectedIds = [];
 
   @override
   void initState() {
@@ -24,6 +27,31 @@ class _FavouriteViewState extends State<FavouriteView> {
     favouriteBloc?.add(CheckLoginEvent());
     //favouriteBloc?.add(GetFavouriteEvent('5|YM96SHenXX05oHAExmSNVhk0UfWJ9XvBdSxu8Cos5b81b629'));
     super.initState();
+  }
+
+  Widget _buildFavouriteIcon(int placeId) {
+    return Container(
+      child: selectedIds.toString().contains(placeId.toString())
+          ? IconButton(
+              icon: const Icon(
+                Icons.favorite_border,
+                color: Colors.pink,
+              ),
+              onPressed: () {},
+            )
+          : IconButton(
+              icon: const Icon(
+                Icons.favorite_border,
+                color: Colors.pink,
+              ),
+              onPressed: () {
+                favouriteBloc?.add(DeleteFavouriteEvent(placeId));
+                setState(() {
+                  selectedIds.add(placeId);
+                });
+              },
+            ),
+    );
   }
 
     Widget _buildFavouriteList(List<favouriteModel.Data> listFavourite) {
@@ -98,13 +126,7 @@ class _FavouriteViewState extends State<FavouriteView> {
                               ],
                             ),
                           ),
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                // Icons.favorite,
-                                Icons.favorite_border,
-                                color: Colors.pink,
-                              )),
+                          _buildFavouriteIcon(listFavourite[index].id)
                         ],
                       ),
                     ],
