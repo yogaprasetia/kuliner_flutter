@@ -1,4 +1,6 @@
 import 'package:kuliner_flutter/data/constant.dart';
+import 'package:kuliner_flutter/data/model/favourite_add_model.dart';
+import 'package:kuliner_flutter/data/model/favourite_delete_model.dart';
 import 'package:kuliner_flutter/data/model/favourite_model.dart';
 import 'package:kuliner_flutter/data/model/place_model.dart';
 import 'package:kuliner_flutter/data/model/profile_model.dart';
@@ -12,6 +14,16 @@ class UserRepository {
 
   Future<PlaceModel> getPlace() => apiService.getPlace(); 
   Future<FavouriteModel> getFavourite(String token) => apiService.getFavourite(token);
+  
+  Future<FavouriteAddModel> addFavourite(
+    String token,
+    int placeId
+  ) => apiService.addFavourite(token, placeId);
+
+  Future<FavouriteDeleteModel> deleteFavourite(
+    String token,
+    int placeId
+  ) => apiService.deleteFavourite(token, placeId);
 
   Future<dynamic> userLogin(
     String email,

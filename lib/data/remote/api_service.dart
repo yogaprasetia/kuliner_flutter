@@ -4,6 +4,8 @@ import 'package:http/http.dart';
 import 'package:http_interceptor/http/http.dart';
 import 'package:kuliner_flutter/data/constant.dart';
 import 'package:kuliner_flutter/data/model/error_model.dart';
+import 'package:kuliner_flutter/data/model/favourite_add_model.dart';
+import 'package:kuliner_flutter/data/model/favourite_delete_model.dart';
 import 'package:kuliner_flutter/data/model/favourite_model.dart';
 import 'package:kuliner_flutter/data/model/login_model.dart';
 import 'package:kuliner_flutter/data/model/place_model.dart';
@@ -39,6 +41,32 @@ class ApiService {
       headers: setHeader(token));
     final json = jsonDecode(response.body);
     return FavouriteModel.fromJson(json);
+  }
+
+  Future<FavouriteAddModel> addFavourite(
+    String token, 
+    int placeId
+  ) async {
+    final path = 'api/user/place/$placeId/favourite';
+    final url = Uri.https(Constant.baseUrl, path);
+    final response = await _client.post(
+      url,
+      headers: setHeader(token));
+    final json = jsonDecode(response.body);
+    return FavouriteAddModel.fromJson(json);
+  }
+
+  Future<FavouriteDeleteModel> deleteFavourite(
+    String token, 
+    int placeId
+  ) async {
+    final path = 'api/user/place/$placeId/favourite';
+    final url = Uri.https(Constant.baseUrl, path);
+    final response = await _client.delete(
+      url,
+      headers: setHeader(token));
+    final json = jsonDecode(response.body);
+    return FavouriteDeleteModel.fromJson(json);
   }
 
   Future<dynamic> userLogin(String email, String password) async {

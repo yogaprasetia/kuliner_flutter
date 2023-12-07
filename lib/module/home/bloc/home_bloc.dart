@@ -31,9 +31,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
     on<NoInternetEvent>((event, emit) async {
       emit(HomeNoInternet(event.message));
-      final response = await userRepository?.getPlace();
-      final result = response != null ? HomeLoaded(response) : HomeNotLoaded('no_data');
-      emit(result);
+    });
+    on<AddFavouriteEvent>((event, emit) async {
+      bool isLogin = false;
+      await userRepository?.isLogin.then((value) {
+        isLogin = true;
+      });
+
+      if (isLogin) {
+        String? token = await userRepository?.getAuthToken;
+        await userRepository?.addFavourite(token!, event.placeId);
+      }
     });
   }
 }

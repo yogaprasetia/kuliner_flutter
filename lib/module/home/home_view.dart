@@ -15,12 +15,38 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   HomeBloc? homeBloc;
+  List<int> selectedIds = [];
 
   @override
   void initState() {
     homeBloc = HomeBloc(RepositoryProvider.of<UserRepository>(context));
     homeBloc?.add(GetPlaceEvent());
     super.initState();
+  }
+
+  Widget _buildPlaceIcon(int placeId) {
+    return Container(
+      child: selectedIds.toString().contains(placeId.toString())
+          ? IconButton(
+              icon: const Icon(
+                Icons.favorite,
+                color: Colors.pink,
+              ),
+              onPressed: () {},
+            )
+          : IconButton(
+              icon: const Icon(
+                Icons.favorite_border,
+                color: Colors.pink,
+              ),
+              onPressed: () {
+                homeBloc?.add(AddFavouriteEvent(placeId));
+                setState(() {
+                  selectedIds.add(placeId);
+                });
+              },
+            ),
+    );
   }
 
   Widget _buildPlaceList(List<placeModel.Data> listPlace) {
@@ -95,15 +121,7 @@ class _HomeViewState extends State<HomeView> {
                               ],
                             ),
                           ),
-                          Container(
-                            child: IconButton(
-                                onPressed: () {},
-                                icon: Icon(
-                                  // Icons.favorite,
-                                  Icons.favorite_border,
-                                  color: Colors.pink,
-                                )),
-                          ),
+                          _buildPlaceIcon(listPlace[index].id)
                         ],
                       ),
                     ],

@@ -19,3 +19,11 @@ class NoInternetEvent extends HomeEvent {
   @override
   List<Object> get props => [message];
 }
+
+class AddFavouriteEvent extends HomeEvent {
+  int placeId;
+  AddFavouriteEvent(this.placeId);
+
+  @override
+  List<Object> get props => [placeId];
+}
